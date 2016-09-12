@@ -1,0 +1,1391 @@
+{
+  "query" : {
+    "bool" : {
+      "fields" : [ {
+        "name" : "adjust_pure_negative",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "disable_coord",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "minimum_should_match",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "must",
+        "type" : "LIST_QUERY_BUILDER"
+      }, {
+        "name" : "must_not",
+        "type" : "LIST_QUERY_BUILDER"
+      }, {
+        "name" : "should",
+        "type" : "LIST_QUERY_BUILDER"
+      } ]
+    },
+    "boosting" : {
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "negative_boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "negative",
+        "type" : "QUERY_BUILDER"
+      }, {
+        "name" : "positive",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "common" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "analyzer",
+        "type" : "STRING"
+      }, {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "cutoff_frequency",
+        "type" : "FLOAT"
+      }, {
+        "name" : "disable_coord",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "minimum_should_match.high_freq",
+        "type" : "STRING"
+      }, {
+        "name" : "high_freq_operator",
+        "type" : "OPERATOR"
+      }, {
+        "name" : "minimum_should_match.low_freq",
+        "type" : "STRING"
+      }, {
+        "name" : "low_freq_operator",
+        "type" : "OPERATOR"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "query",
+        "type" : "OBJECT"
+      } ]
+    },
+    "constant_score" : {
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "filter",
+        "type" : "FILTER_BUILDER"
+      }, {
+        "name" : "query",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "dis_max" : {
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "tie_breaker",
+        "type" : "FLOAT"
+      }, {
+        "name" : "queries",
+        "type" : "LIST_QUERY_BUILDER"
+      } ]
+    },
+    "field_masking_span" : {
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "field",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "query",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "filtered" : {
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "filter",
+        "type" : "FILTER_BUILDER"
+      }, {
+        "name" : "query",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "flt" : {
+      "fields" : [ {
+        "name" : "analyzer",
+        "type" : "STRING"
+      }, {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "fail_on_unsupported_field",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "fields",
+        "type" : "LIST"
+      }, {
+        "name" : "fuzziness",
+        "type" : "FUZZINESS"
+      }, {
+        "name" : "ignore_tf",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "like_text",
+        "type" : "STRING"
+      }, {
+        "name" : "max_query_terms",
+        "type" : "INTEGER"
+      }, {
+        "name" : "prefix_length",
+        "type" : "INTEGER"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      } ]
+    },
+    "flt_field" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "analyzer",
+        "type" : "STRING"
+      }, {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "fail_on_unsupported_field",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "fuzziness",
+        "type" : "FUZZINESS"
+      }, {
+        "name" : "ignore_tf",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "like_text",
+        "type" : "STRING"
+      }, {
+        "name" : "max_query_terms",
+        "type" : "INTEGER"
+      }, {
+        "name" : "prefix_length",
+        "type" : "INTEGER"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      } ]
+    },
+    "fuzzy" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "fuzziness",
+        "type" : "FUZZINESS"
+      }, {
+        "name" : "max_expansions",
+        "type" : "INTEGER"
+      }, {
+        "name" : "prefix_length",
+        "type" : "INTEGER"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "rewrite",
+        "type" : "STRING"
+      }, {
+        "name" : "transpositions",
+        "type" : "BOOLEAN"
+      } ]
+    },
+    "geo_shape" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "id",
+        "type" : "STRING"
+      }, {
+        "name" : "index",
+        "type" : "STRING"
+      }, {
+        "name" : "path",
+        "type" : "STRING"
+      }, {
+        "name" : "type",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "shape",
+        "type" : "SHAPE_BUILDER"
+      }, {
+        "name" : "strategy",
+        "type" : "SPATIAL_STRATEGY"
+      } ]
+    },
+    "has_child" : {
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "child_type",
+        "type" : "STRING"
+      }, {
+        "name" : "max_children",
+        "type" : "INTEGER"
+      }, {
+        "name" : "min_children",
+        "type" : "INTEGER"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "score_type",
+        "type" : "STRING"
+      }, {
+        "name" : "short_circuit_cutoff",
+        "type" : "INTEGER"
+      }, {
+        "name" : "query",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "has_parent" : {
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "parent_type",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "score_type",
+        "type" : "STRING"
+      }, {
+        "name" : "query",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "ids" : {
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "types",
+        "type" : "LIST"
+      }, {
+        "name" : "values",
+        "type" : "LIST"
+      } ]
+    },
+    "indices" : {
+      "fields" : [ {
+        "name" : "indices",
+        "type" : "LIST"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "no_match_query",
+        "type" : "STRING"
+      }, {
+        "name" : "no_match_query",
+        "type" : "QUERY_BUILDER"
+      }, {
+        "name" : "query",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "match" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "analyzer",
+        "type" : "STRING"
+      }, {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "cutoff_frequency",
+        "type" : "FLOAT"
+      }, {
+        "name" : "fuzziness",
+        "type" : "FUZZINESS"
+      }, {
+        "name" : "fuzzy_rewrite",
+        "type" : "STRING"
+      }, {
+        "name" : "fuzzy_transpositions",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "lenient",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "max_expansions",
+        "type" : "INTEGER"
+      }, {
+        "name" : "minimum_should_match",
+        "type" : "STRING"
+      }, {
+        "name" : "operator",
+        "type" : "OPERATOR"
+      }, {
+        "name" : "prefix_length",
+        "type" : "INTEGER"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "rewrite",
+        "type" : "STRING"
+      }, {
+        "name" : "slop",
+        "type" : "INTEGER"
+      }, {
+        "name" : "query",
+        "type" : "OBJECT"
+      }, {
+        "name" : "type",
+        "type" : "OTHER"
+      }, {
+        "name" : "zero_terms_query",
+        "type" : "STRING"
+      } ]
+    },
+    "match_all" : {
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "norms_field",
+        "type" : "STRING"
+      } ]
+    },
+    "mlt" : {
+      "fields" : [ {
+        "name" : "analyzer",
+        "type" : "STRING"
+      }, {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "boost_terms",
+        "type" : "FLOAT"
+      }, {
+        "name" : "docs",
+        "type" : "LIST"
+      }, {
+        "name" : "fail_on_unsupported_field",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "fields",
+        "type" : "LIST"
+      }, {
+        "name" : "ids",
+        "type" : "LIST"
+      }, {
+        "name" : "include",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "like_text",
+        "type" : "STRING"
+      }, {
+        "name" : "max_doc_freq",
+        "type" : "INTEGER"
+      }, {
+        "name" : "max_query_terms",
+        "type" : "INTEGER"
+      }, {
+        "name" : "max_word_length",
+        "type" : "INTEGER"
+      }, {
+        "name" : "min_doc_freq",
+        "type" : "INTEGER"
+      }, {
+        "name" : "min_term_freq",
+        "type" : "INTEGER"
+      }, {
+        "name" : "min_word_length",
+        "type" : "INTEGER"
+      }, {
+        "name" : "minimum_should_match",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "stop_words",
+        "type" : "LIST"
+      } ]
+    },
+    "mlt_field" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "analyzer",
+        "type" : "STRING"
+      }, {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "boost_terms",
+        "type" : "FLOAT"
+      }, {
+        "name" : "fail_on_unsupported_field",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "like_text",
+        "type" : "STRING"
+      }, {
+        "name" : "max_doc_freq",
+        "type" : "INTEGER"
+      }, {
+        "name" : "max_query_terms",
+        "type" : "INTEGER"
+      }, {
+        "name" : "max_word_length",
+        "type" : "INTEGER"
+      }, {
+        "name" : "min_doc_freq",
+        "type" : "INTEGER"
+      }, {
+        "name" : "min_term_freq",
+        "type" : "INTEGER"
+      }, {
+        "name" : "min_word_length",
+        "type" : "INTEGER"
+      }, {
+        "name" : "minimum_should_match",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "stop_words",
+        "type" : "LIST"
+      } ]
+    },
+    "multi_match" : {
+      "fields" : [ {
+        "name" : "analyzer",
+        "type" : "STRING"
+      }, {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "cutoff_frequency",
+        "type" : "FLOAT"
+      }, {
+        "name" : "fields",
+        "type" : "LIST"
+      }, {
+        "name" : "fuzziness",
+        "type" : "FUZZINESS"
+      }, {
+        "name" : "fuzzy_rewrite",
+        "type" : "STRING"
+      }, {
+        "name" : "lenient",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "max_expansions",
+        "type" : "INTEGER"
+      }, {
+        "name" : "minimum_should_match",
+        "type" : "STRING"
+      }, {
+        "name" : "operator",
+        "type" : "OPERATOR"
+      }, {
+        "name" : "prefix_length",
+        "type" : "INTEGER"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "rewrite",
+        "type" : "STRING"
+      }, {
+        "name" : "slop",
+        "type" : "INTEGER"
+      }, {
+        "name" : "query",
+        "type" : "OBJECT"
+      }, {
+        "name" : "tie_breaker",
+        "type" : "FLOAT"
+      }, {
+        "name" : "type",
+        "type" : "STRING"
+      }, {
+        "name" : "use_dis_max",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "zero_terms_query",
+        "type" : "STRING"
+      } ]
+    },
+    "nested" : {
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "path",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "score_mode",
+        "type" : "STRING"
+      }, {
+        "name" : "filter",
+        "type" : "FILTER_BUILDER"
+      }, {
+        "name" : "query",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "prefix" : {
+      "namedObject" : true,
+      "namedObjectValue" : true,
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "prefix",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "rewrite",
+        "type" : "STRING"
+      } ]
+    },
+    "query_string" : {
+      "fields" : [ {
+        "name" : "allow_leading_wildcard",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "analyze_wildcard",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "analyzer",
+        "type" : "STRING"
+      }, {
+        "name" : "auto_generate_phrase_queries",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "default_field",
+        "type" : "STRING"
+      }, {
+        "name" : "default_operator",
+        "type" : "OPERATOR"
+      }, {
+        "name" : "enable_position_increments",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "fields",
+        "type" : "LIST"
+      }, {
+        "name" : "fuzziness",
+        "type" : "FUZZINESS"
+      }, {
+        "name" : "fuzzy_max_expansions",
+        "type" : "INTEGER"
+      }, {
+        "name" : "fuzzy_prefix_length",
+        "type" : "INTEGER"
+      }, {
+        "name" : "fuzzy_rewrite",
+        "type" : "STRING"
+      }, {
+        "name" : "lenient",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "locale",
+        "type" : "STRING"
+      }, {
+        "name" : "lowercase_expanded_terms",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "max_determinized_states",
+        "type" : "INTEGER"
+      }, {
+        "name" : "minimum_should_match",
+        "type" : "STRING"
+      }, {
+        "name" : "phrase_slop",
+        "type" : "INTEGER"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "query",
+        "type" : "STRING"
+      }, {
+        "name" : "quote_analyzer",
+        "type" : "STRING"
+      }, {
+        "name" : "quote_field_suffix",
+        "type" : "STRING"
+      }, {
+        "name" : "rewrite",
+        "type" : "STRING"
+      }, {
+        "name" : "tie_breaker",
+        "type" : "FLOAT"
+      }, {
+        "name" : "time_zone",
+        "type" : "STRING"
+      }, {
+        "name" : "use_dis_max",
+        "type" : "BOOLEAN"
+      } ]
+    },
+    "range" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "from",
+        "type" : "OBJECT"
+      }, {
+        "name" : "include_lower",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "include_upper",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "time_zone",
+        "type" : "STRING"
+      }, {
+        "name" : "to",
+        "type" : "OBJECT"
+      } ]
+    },
+    "regexp" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "flags_value",
+        "type" : "INTEGER"
+      }, {
+        "name" : "max_determinized_states",
+        "type" : "INTEGER"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "value",
+        "type" : "STRING"
+      }, {
+        "name" : "rewrite",
+        "type" : "STRING"
+      } ]
+    },
+    "span_first" : {
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "end",
+        "type" : "INTEGER"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "match",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "span_multi" : {
+      "fields" : [ {
+        "name" : "query",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "span_near" : {
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "clauses",
+        "type" : "LIST"
+      }, {
+        "name" : "collect_payloads",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "in_order",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "slop",
+        "type" : "INTEGER"
+      } ]
+    },
+    "span_not" : {
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "dist",
+        "type" : "INTEGER"
+      }, {
+        "name" : "post",
+        "type" : "INTEGER"
+      }, {
+        "name" : "pre",
+        "type" : "INTEGER"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "exclude",
+        "type" : "QUERY_BUILDER"
+      }, {
+        "name" : "include",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "span_or" : {
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "clauses",
+        "type" : "LIST"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      } ]
+    },
+    "span_term" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      } ]
+    },
+    "template" : {
+      "fields" : [ {
+        "name" : "file",
+        "type" : "STRING"
+      }, {
+        "name" : "id",
+        "type" : "STRING"
+      }, {
+        "name" : "params",
+        "type" : "MAP"
+      }, {
+        "name" : "query",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "term" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      } ]
+    },
+    "terms" : {
+      "namedArray" : true,
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "disable_coord",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "minimum_should_match",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      } ]
+    },
+    "top_children" : {
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "type",
+        "type" : "STRING"
+      }, {
+        "name" : "factor",
+        "type" : "INTEGER"
+      }, {
+        "name" : "incremental_factor",
+        "type" : "INTEGER"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "score",
+        "type" : "STRING"
+      }, {
+        "name" : "query",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "wildcard" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "boost",
+        "type" : "FLOAT"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "rewrite",
+        "type" : "STRING"
+      }, {
+        "name" : "wildcard",
+        "type" : "STRING"
+      } ]
+    },
+    "wrapper" : {
+      "fields" : [ ]
+    }
+  },
+  "filter" : {
+    "and" : {
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "filters",
+        "type" : "LIST_FILTER_BUILDER"
+      } ]
+    },
+    "bool" : {
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "must",
+        "type" : "LIST_FILTER_BUILDER"
+      }, {
+        "name" : "must_not",
+        "type" : "LIST_FILTER_BUILDER"
+      }, {
+        "name" : "should",
+        "type" : "LIST_FILTER_BUILDER"
+      } ]
+    },
+    "exists" : {
+      "fields" : [ {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "field",
+        "type" : "STRING"
+      } ]
+    },
+    "geo_bbox" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "bottom_right[0]",
+        "type" : "DOUBLE",
+        "label" : "right"
+      }, {
+        "name" : "bottom_right[1]",
+        "type" : "DOUBLE",
+        "label" : "bottom"
+      }, {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "top_left[0]",
+        "type" : "DOUBLE",
+        "label" : "left"
+      }, {
+        "name" : "top_left[1]",
+        "type" : "DOUBLE",
+        "label" : "top"
+      }, {
+        "name" : "type",
+        "type" : "STRING"
+      } ]
+    },
+    "geo_distance" : {
+      "namedArray" : true,
+      "namedArrayValues" : "lon,lat",
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "distance",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "distance_type",
+        "type" : "GEO_DISTANCE"
+      }, {
+        "name" : "optimize_bbox",
+        "type" : "OPTIMIZE_BBOX"
+      } ]
+    },
+    "geo_distance_range" : {
+      "namedArray" : true,
+      "namedArrayValues" : "lon,lat",
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "from",
+        "type" : "OBJECT"
+      }, {
+        "name" : "distance_type",
+        "type" : "GEO_DISTANCE"
+      }, {
+        "name" : "include_lower",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "include_upper",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "optimize_bbox",
+        "type" : "OPTIMIZE_BBOX"
+      }, {
+        "name" : "to",
+        "type" : "OBJECT"
+      } ]
+    },
+    "geo_polygon" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "POINTS",
+        "type" : "LIST"
+      } ]
+    },
+    "geo_shape" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "id",
+        "type" : "STRING"
+      }, {
+        "name" : "index",
+        "type" : "STRING"
+      }, {
+        "name" : "path",
+        "type" : "STRING"
+      }, {
+        "name" : "type",
+        "type" : "STRING"
+      }, {
+        "name" : "relation",
+        "type" : "SHAPE_RELATION"
+      }, {
+        "name" : "shape",
+        "type" : "SHAPE_BUILDER"
+      }, {
+        "name" : "strategy",
+        "type" : "SPATIAL_STRATEGY"
+      } ]
+    },
+    "has_child" : {
+      "fields" : [ {
+        "name" : "child_type",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "max_children",
+        "type" : "INTEGER"
+      }, {
+        "name" : "min_children",
+        "type" : "INTEGER"
+      }, {
+        "name" : "short_circuit_cutoff",
+        "type" : "INTEGER"
+      }, {
+        "name" : "filter",
+        "type" : "FILTER_BUILDER"
+      }, {
+        "name" : "query",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "has_parent" : {
+      "fields" : [ {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "parent_type",
+        "type" : "STRING"
+      }, {
+        "name" : "filter",
+        "type" : "FILTER_BUILDER"
+      }, {
+        "name" : "query",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "ids" : {
+      "fields" : [ {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "types",
+        "type" : "LIST"
+      }, {
+        "name" : "values",
+        "type" : "LIST"
+      } ]
+    },
+    "indices" : {
+      "fields" : [ {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "indices",
+        "type" : "LIST"
+      }, {
+        "name" : "no_match_filter",
+        "type" : "STRING"
+      }, {
+        "name" : "filter",
+        "type" : "FILTER_BUILDER"
+      }, {
+        "name" : "no_match_filter",
+        "type" : "FILTER_BUILDER"
+      } ]
+    },
+    "limit" : {
+      "fields" : [ {
+        "name" : "value",
+        "type" : "INTEGER"
+      } ]
+    },
+    "match_all" : {
+      "fields" : [ ]
+    },
+    "missing" : {
+      "fields" : [ {
+        "name" : "existence",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "field",
+        "type" : "STRING"
+      }, {
+        "name" : "null_value",
+        "type" : "BOOLEAN"
+      } ]
+    },
+    "nested" : {
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "join",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "path",
+        "type" : "STRING"
+      }, {
+        "name" : "filter",
+        "type" : "FILTER_BUILDER"
+      }, {
+        "name" : "query",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "not" : {
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "filter",
+        "type" : "FILTER_BUILDER"
+      } ]
+    },
+    "numeric_range" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "from",
+        "type" : "OBJECT"
+      }, {
+        "name" : "include_lower",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "include_upper",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "to",
+        "type" : "OBJECT"
+      } ]
+    },
+    "or" : {
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "filters",
+        "type" : "LIST_FILTER_BUILDER"
+      } ]
+    },
+    "prefix" : {
+      "namedObject" : true,
+      "namedObjectValue" : true,
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      } ]
+    },
+    "query" : {
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "query",
+        "type" : "QUERY_BUILDER"
+      } ]
+    },
+    "range" : {
+      "namedObject" : true,
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "execution",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "from",
+        "type" : "OBJECT"
+      }, {
+        "name" : "include_lower",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "include_upper",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "time_zone",
+        "type" : "STRING"
+      }, {
+        "name" : "to",
+        "type" : "OBJECT"
+      } ]
+    },
+    "regexp" : {
+      "namedObject" : true,
+      "namedObjectValue" : true,
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "flags_value",
+        "type" : "INTEGER"
+      }, {
+        "name" : "max_determinized_states",
+        "type" : "INTEGER"
+      } ]
+    },
+    "script" : {
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      }, {
+        "name" : "lang",
+        "type" : "STRING"
+      }, {
+        "name" : "params",
+        "type" : "MAP"
+      }, {
+        "name" : "script",
+        "type" : "STRING"
+      } ]
+    },
+    "term" : {
+      "namedObject" : true,
+      "namedObjectValue" : true,
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      } ]
+    },
+    "terms" : {
+      "namedObject" : true,
+      "namedObjectValue" : true,
+      "fields" : [ {
+        "name" : "_cache",
+        "type" : "BOOLEAN"
+      }, {
+        "name" : "_cache_key",
+        "type" : "STRING"
+      }, {
+        "name" : "execution",
+        "type" : "STRING"
+      }, {
+        "name" : "_name",
+        "type" : "STRING"
+      } ]
+    },
+    "type" : {
+      "fields" : [ {
+        "name" : "value",
+        "type" : "STRING"
+      } ]
+    },
+    "wrapper" : {
+      "fields" : [ ]
+    }
+  }
+}

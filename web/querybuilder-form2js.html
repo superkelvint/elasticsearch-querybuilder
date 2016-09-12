@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ElasticSearch Query Builder</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]>
+    <script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/handlebars-v1.3.0.js"></script>
+    <script type="text/javascript" src="js/form2js.js"></script>
+    <script type="text/javascript" src="js/jquery.toObject.js"></script>
+    <script type="text/javascript" src="js/json2.js"></script>
+    <script type="text/javascript" src="js/jquery.storageapi.js"></script>
+    <script type="text/javascript" src="js/garlic.min.js"></script>
+    <script type="text/javascript" src="qb-param-render-1.2.1.js"></script>
+    <style>
+        body {
+        }
+
+        .fields1 {
+            padding-left: 30px;
+        }
+
+        .fields2 {
+            padding-left: 60px;
+        }
+
+        .fields3 {
+            padding-left: 90px;
+        }
+
+        .fields4 {
+            padding-left: 120px;
+        }
+
+        .queryadd {
+            padding-bottom: 10px;
+        }
+
+        .qfli {
+            padding-top: 10px;
+            border-bottom-width: 2px;
+            border-bottom-style: dotted;
+            border-bottom-color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">ElasticSearch QueryBuilder</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <!--<li><a href="#about">About</a></li>-->
+                <!--<li><a href="#contact">Contact</a></li>-->
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <form class="qbform form" role="form" id="qbform">
+            <div class="col-sm-8">
+                <h2>Query</h2>
+                <select class="qb form-control rootquery" tgid="aaaaa" type="query">
+                    <option value="">Select query type</option>
+                </select>
+                <select class="fb form-control" tgid="aaaaa" type="filter" style="display:none">
+                    <option value="">Select filter type</option>
+                </select>
+                <div class="qbfields" id="qbfields_aaaaa"></div>
+            </div>
+            <div class="col-sm-4">
+                <h2>JSON</h2>
+                <textarea id="result" class="form-control" rows="20"></textarea> <br/>
+                <label class="control-label">ES host</label>
+                <input type="text" class="form-control" name="curl-host" id="curl-host" value="localhost:9200">
+                <label class="control-label">Index name</label>
+                <input type="text" class="form-control" name="curl-index" id="curl-index" value="twitter">
+                <label class="control-label">Type</label>
+                <input type="text" class="form-control" name="curl-type" id="curl-type" value="tweet">
+                <h2>curl</h2>
+                <textarea id="curl-result" class="form-control" rows="20"></textarea> <br/>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+String.prototype.endsWith = function (suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
+/**
+ * Data model for queries.
+ */
+var querybuilders;
+
+/**
+ * Data model for filters.
+ */
+var filterbuilders;
+
+/**
+ * Load the data model.
+ */
+$.getJSON("qb-model-1.7.2.json", function (data) {
+    loadDataModel(data);
+});
+
+function doGarlic() {
+    /*
+    $('form').garlic( {
+        getPath: function ( $elem ) {
+            var prefix = "garlic:querybuilder:";
+            if(typeof $elem.attr('name') != 'undefined') return prefix + $elem.attr('name');
+            else if(typeof $elem.attr('id') != 'undefined') return prefix + $elem.attr('id');
+            else if(typeof $elem.attr('tgid') != 'undefined') return prefix + $elem.attr('tgid');
+
+            var q = $elem
+                    .parentsUntil('body')
+                    .andSelf()
+                    .map(function() {
+                        return this.nodeName + ':eq(' + $(this).index() + ')';
+                    }).get().join('>');
+
+            return prefix + q;
+        }
+    } );*/
+}
+
+function loadDataModel(data) {
+    querybuilders = data['query'];
+    filterbuilders = data['filter'];
+    for (var k in querybuilders) {
+        $('.qb').append($('<option/>', {
+            value: k,
+            text: k,
+            id: k
+        }));
+    }
+
+    for (var k in filterbuilders) {
+        $('.fb').append($('<option/>', {
+            value: k,
+            text: k,
+            id: k
+        }));
+    }
+
+/*
+    if ($.localStorage.isSet('querybuilder')) {
+        $('#qbform').html($.localStorage.get('querybuilder'));
+        doGarlic();
+    }
+*/
+
+    qbOnChange();
+}
+
+
+var qbOnChangeActual = function () {
+    var dslType = $(this).val();
+    var filterOrQuery = $(this).attr('type');
+    var data = filterOrQuery == 'query' ? querybuilders[dslType] : filterbuilders[dslType];
+    var docurl = getESDocURL(dslType, filterOrQuery);
+    data['docurl'] = docurl;
+    data['queryType'] = dslType;
+    // find prefix
+    var prefix = dslType;
+    if (typeof $(this).attr('_name') != 'undefined') {
+        prefix = $(this).attr('_name') + "." + prefix;
+    }
+
+    renderQueryBuilderParams(prefix, data, $(this).attr('tgid'), '#qbfields_' + $(this).attr('tgid'), filterOrQuery);
+    updateRightPanel();
+
+    var tgid = $(this).attr('tgid');
+
+    // Ajax load documentation URL
+    $.get(docurl, function (data) {
+        var $data = $(data);
+        $('.toc,.edit_me', $data).remove();
+        // fix images
+        $('img', $data).each(function () {
+            var src = $(this).attr('src');
+            $(this).attr('src', 'https://www.elastic.co/guide/en/elasticsearch/reference/current/' + src);
+        });
+        // fix links
+        $('a', $data).each(function () {
+            $(this).attr('target', '_blank');
+            var href = $(this).attr('href');
+            $(this).attr('href', 'https://www.elastic.co/guide/en/elasticsearch/reference/current/' + href);
+        });
+        var content = $("div.section", $data);
+        $('#fields_' + tgid + '_doc').html(content.html());
+    });
+};
+
+
+/**
+ * The event handlers to bind when the form changes (new elements are getting added).
+ */
+function qbOnChange() {
+    $('.qb,.fb').change(qbOnChangeActual);
+
+    var f = function () {
+        updateRightPanel();
+    };
+    /**
+     * Update JSON when user types in the forms
+     */
+    $('.qbform input, .qbform .ref').unbind('keyup').keyup(f).unbind('change').change(f);
+
+    /**
+     * event handler for the "Add Query" button for querybuilder lists
+     */
+    $('.qbform .queryadd').unbind('click').click(function () {
+        var fullname = $(this).attr('target');
+        var filterOrQuery = $(this).attr('targettype');
+        var sel = filterOrQuery == 'query' ? '.qb' : '.fb';
+        var randnum = Math.floor((Math.random() + 1) * 100);
+        var indexedname = fullname + "[" + randnum + "]";
+
+        var randid = (rand_id());
+        s = "<li class='qfli'><label class='control-label'>" + capitalize(filterOrQuery) + " Type</label><select _name='" + indexedname + "' class='qb form-control' tgid=" + randid + " type=" + filterOrQuery + ">" + $(sel).html() + "</select>";
+        s += '<div class="qbfields" id="qbfields_' + randid + '"></div><br/><input type="button" class="btn btn-danger center-block querydel" value="Delete"><br/></li>';
+        $(this).siblings('ol').append(s);
+        qbOnChange();
+    });
+
+    /**
+     * event handler for the "Delete Query" button for querybuilder lists
+     */
+    $('.qbform .querydel').unbind('click').click(function () {
+        $(this).parents('.qfli').remove();
+        updateRightPanel();
+    });
+
+    /**
+     * Event handler for queries with namedobjects,
+     * i.e. those which are named based on a field
+     *
+     * Because of how form2s works, in order for namedobject
+     * serialization to work, we need to rename this form's fields to
+     * start with the namedObject name.
+     * e.g. if namedObject is 'foo', then all this form's fields
+     * must go like foo.boost
+     */
+    $('.qbform .namedObject').unbind('keyup').keyup(function () {
+        // don't rename fields if there's a namedArray or namedObject
+        if($(this).siblings('.namedArray').length > 0) return;
+
+        var fieldname = $.trim($(this).val());
+        fieldname = fieldname.replace(/ /g, '_');
+
+        if($(this).siblings('.namedObjectValue').length > 0) {
+            $(this).siblings('.namedObjectValue').each(function(){
+                $(this).attr('name', $(this).attr('prefix')+"."+fieldname);
+            });
+        } else {
+            // look for the parent node to apply name rewrites to
+            // first try to see if this is a nested query, in which case it should
+            // only apply to the children of this query
+            var parents = $(this).parents('.qbfields');
+            if (parents.length == 0) parents = $(this).parents('form');
+            parents.find(':input').each(function () {
+                var n = $.trim($(this).attr('name'));
+                if (typeof n != 'undefined' && n != '') {
+                    var base = '';
+                    // set a base param because this is run
+                    // on keyup, so there'll be multiple invocations.
+                    // the base param preserves the 'original'
+                    if (!$(this).is('[base]')) {
+                        $(this).attr('base', n);
+                        base = n;
+                    } else {
+                        base = $(this).attr('base')
+                    }
+                    var arr = base.split(".");
+                    var insertionPoint = -1;
+
+                    // sigh. hack for CommonTerm's minimum_should_match.low_freq,
+                    // and probably other props that are 2 levels deep
+                    if (arr[arr.length - 2] == 'minimum_should_match') insertionPoint--;
+
+                    arr.splice(insertionPoint, 0, fieldname);
+                    result = arr.join(".");
+                    $(this).attr('name', result);
+                }
+            });
+        }
+    });
+
+    $('.qbform .namedArray').unbind('keyup').keyup(function(){
+        $(this).siblings('.namedArray_values').first().keyup();
+    });
+
+    $('.qbform .namedArray_values').unbind('keyup').keyup(function(){
+        var elements = $(this).val().split(",");
+        // clear out the container
+        var namedObject = $(this).siblings('.namedArray').first().val();
+        var prefix = $(this).attr('prefix');
+        $(this).next().html('');
+        var html = '';
+        for(var i=0;i<elements.length;++i) {
+            html += "<input type='hidden' name='"+prefix+"."+namedObject+"[]' value='"+elements[i]+"'>";
+        }
+        $(this).next().html(html);
+        updateRightPanel();
+    });
+
+    $('.qbform .list_values').unbind('keyup').keyup(function(){
+        var elements = $(this).val().split(/,|\|/);
+        // clear out the container
+        var prefix = $(this).attr('prefix');
+        $(this).next().html('');
+        var html = '';
+        for(var i=0;i<elements.length;++i) {
+            html += "<input type='hidden' name='"+prefix+"[]' value='"+elements[i]+"'>";
+        }
+        $(this).next().html(html);
+        updateRightPanel();
+    });
+
+    /**
+     * Documentation toggle button
+     */
+    $('.doctog').unbind('click').click(function () {
+        $('#' + $(this).attr('target')).toggle();
+        $('#' + $(this).attr('target') + "_url").toggle();
+    });
+
+
+    /**
+     * Adds a css class for nested queries for indentation purposes
+     */
+    $('.qbfields').each(function () {
+        $(this).addClass('fields' + $(this).parents('.qbfields').length);
+    });
+}
+
+/**
+ * Convert the form into json, and populate the relevant fields
+ */
+function updateRightPanel() {
+    doGarlic();
+
+    // convert form
+    var obj = $('form').toObject({mode: 'all', skipEmpty: true})[0];
+    delete obj['curl-host'];
+    delete obj['curl-index'];
+    delete obj['curl-type'];
+    var json = JSON.stringify(obj, null, '  ');
+    json = json.replace(/\s+"__MARKER": "__MARKER",?/g, ''); // awful hack to get form2js to render empty objects
+    $('#result').text(json);
+
+    // update curl output
+    var host = $('#curl-host').val();
+    var index = $('#curl-index').val();
+    var type = $('#curl-type').val();
+    var curl = "curl -XGET 'http://" + host + "/" + index + "/" + type + "/_search' -d ";
+    curl += "'{\n\"query\": " + json + "\n}\n'";
+    $('#curl-result').text(curl);
+
+//    $.localStorage.set('querybuilder', $('#qbform').html());
+}
+
+/*$('.rootquery').change(function(){
+    $.localStorage.remove('querybuilder');
+    var keys = $.localStorage.keys();
+    for(var i=0;i<keys.length;++i) {
+        if(keys[i].match(/^garlic:/)) {
+//            $.localStorage.remove(keys[i]);
+        }
+    }
+})*/;
+
+/**
+ * Render query builder parameters into HTML via Handlebars.
+ * @param prefix
+ * @param qb
+ * @param id
+ * @param targetSelector
+ */
+function renderQueryBuilderParams(prefix, qb, id, targetSelector, filterOrQuery) {
+    var source = $("#fields-template").html();
+    var template = Handlebars.compile(source);
+    qb['prefix'] = prefix;
+    qb['id'] = id;
+    qb['filterOrQuery'] = filterOrQuery;
+    var html = template(qb);
+    $(targetSelector).html(html);
+    qbOnChange();
+}
+
+/**
+ * Start of misc functions.
+ */
+function getESDocURL(queryType, filterOrQuery) {
+    queryType = queryType.replace(/_/g, '-');
+    if (queryType == 'common') queryType = 'common-terms';
+    else if (queryType == 'geo-bbox') queryType = 'geo-bounding-box';
+    return "https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-" + queryType + "-" + filterOrQuery + ".html";
+}
+
+var capitalize = function (string) {
+    if (typeof string == 'undefined') return '';
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
+Handlebars.registerHelper('capitalize', capitalize);
+
+function rand_id() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 5; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+</script>
+
+<script id="fields-template" type="text/x-handlebars-template">
+    <div class="fields_{{id}}">
+        {{#if namedObject}}
+        <h4>Name of field to query</h4>
+        <input type="text" class="form-control namedObject" id="{{id}}_namedObject">
+        {{#if namedObjectValue}}
+        <h4>Field value</h4>
+        <input type="text" class="form-control namedObjectValue" prefix="{{prefix}}" id="{{id}}_namedObjectValue">
+        {{/if}}
+        {{/if}}
+        {{#if namedArray}}
+        <h4>Name of field to query</h4>
+        <input type="text" class="form-control namedArray" id="{{id}}_namedArray">
+        <h4>Comma- or pipe-separated values {{#if namedArrayValues}}[{{namedArrayValues}}]{{/if}}</h4>
+        <input type="text" class="form-control namedArray_values" prefix="{{prefix}}" id="{{id}}_namedArray_values" order="{{namedArrayValues}}" >
+        <div class="namedArray_valuesContainer"></div>
+        {{/if}}
+
+        <h4>{{capitalize filterOrQuery}} Parameters</h4>
+        <!-- DO NOT REMOVE. This __MARKER is used as a workaround for form2js' serialization. -->
+        <input type="hidden" name="{{prefix}}.__MARKER" value="__MARKER">
+        {{#each fields}}
+        <div class="form-group">
+            {{#if label}}
+            <label for="{{name}}" class="control-label">{{label}} </label>
+            {{else}}
+            <label for="{{name}}" class="control-label">{{name}} </label>
+            {{/if}}
+            <small>({{type}})</small>
+            {{{render_param ../prefix name type ../id}}}
+        </div>
+        {{/each}}
+        <input type="button" id="{{queryType}}_doctog" class="btn btn-primary doctog" value="Toggle {{queryType}} {{filterOrQuery}} documentation" target="fields_{{id}}_doc">
+        <div id="fields_{{id}}_doc" style="display:none"></div>
+        <div id="fields_{{id}}_doc_url" style="display:none"><a href="{{docurl}}">{{docurl}}</a><br/></div>
+        <br/>
+    </div>
+</script>
+</body>
+</html>
